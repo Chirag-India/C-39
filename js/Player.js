@@ -3,7 +3,9 @@ class Player {
     this.index = null;
     this.distance = 0;
     this.name = null;
+    this.Rank = null;
   }
+  
 
   getCount(){
     var playerCountRef = database.ref('playerCount');
@@ -32,4 +34,16 @@ class Player {
       allPlayers = data.val();
     })
   }
+   getCarsAtEnd(){
+     var CAEref = database.ref('CarsAtEnd');
+    CAEref.on("value",(data)=>{
+      this.Rank = data.val();
+    })
+   }
+   static updateCAE(Rank){
+    database.ref('/').update({
+      CarsAtEnd :Rank
+    });
+
+   }
 }
